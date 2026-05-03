@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container page-container py-4" style="max-width: 600px;">
+        <p class="text-uppercase fw-semibold mb-4" style="letter-spacing: 0.08em;">Checkout</p>
+
+        <form action="/checkout" method="POST">
+            {{ form.hidden_tag() }}
+
+            <p class="text-uppercase text-muted small fw-semibold mb-3" style="letter-spacing: 0.08em;">Personal details</p>
+
+            <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                {% for error in form.name.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                {% for error in form.email.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.phone.label(class="form-label") }}
+                {{ form.phone(class="form-control" + (" is-invalid" if form.phone.errors else "")) }}
+                {% for error in form.phone.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <p class="text-uppercase text-muted small fw-semibold mb-3 mt-5" style="letter-spacing: 0.08em;">Delivery address</p>
+
+            <div class="mb-3">
+                {{ form.address1.label(class="form-label") }}
+                {{ form.address1(class="form-control" + (" is-invalid" if form.address1.errors else "")) }}
+                {% for error in form.address1.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.address2.label(class="form-label") }}
+                {{ form.address2(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.city.label(class="form-label") }}
+                {{ form.city(class="form-control" + (" is-invalid" if form.city.errors else "")) }}
+                {% for error in form.city.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.postcode.label(class="form-label") }}
+                {{ form.postcode(class="form-control" + (" is-invalid" if form.postcode.errors else "")) }}
+                {% for error in form.postcode.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <p class="text-uppercase text-muted small fw-semibold mb-3 mt-5" style="letter-spacing: 0.08em;">Card details</p>
+
+            <div class="mb-3">
+                {{ form.card_number.label(class="form-label") }}
+                {{ form.card_number(class="form-control" + (" is-invalid" if form.card_number.errors else ""), placeholder="1234 5678 9012 3456", maxlength=19) }}
+                {% for error in form.card_number.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.expiry.label(class="form-label") }}
+                {{ form.expiry(class="form-control" + (" is-invalid" if form.expiry.errors else ""), placeholder="MM/YY", maxlength=5) }}
+                {% for error in form.expiry.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="mb-3">
+                {{ form.cvv.label(class="form-label") }}
+                {{ form.cvv(class="form-control" + (" is-invalid" if form.cvv.errors else ""), placeholder="123", maxlength=3) }}
+                {% for error in form.cvv.errors %}
+                    <div class="invalid-feedback">{{ error }}</div>
+                {% endfor %}
+            </div>
+
+            <div class="border-top pt-3 mt-5">
+                {{ form.submit(class="btn btn-dark w-100 py-2") }}
+            </div>
+
+        </form>
+    </div>
+{% endblock %}

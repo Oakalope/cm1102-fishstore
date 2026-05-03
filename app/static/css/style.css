@@ -1,0 +1,26 @@
+#tooltip {
+    display: none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    max-width: 200px;
+    z-index: 1000; /* ensures it appears above everything */
+}
+
+body {
+    background: dimgrey;
+}
+
+.page-container {
+    background: white;
+    padding: 40px;
+}
+
+.title-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 10px;
+
+}

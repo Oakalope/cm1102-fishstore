@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container page-container">
+        <div class="row align-items-center mb-">
+            <div class="col-8">
+                <h1 class="text-center">Oakley's Fish Store</h1>
+            </div>
+            <div class="col-4 text-right">
+                <div id="tooltip"></div>
+                <form action="" method="post">
+                    {{sort.hidden_tag()}}
+                    {{sort.sort()}}
+                    {{sort.submit()}}
+                </form>
+            </div>
+        </div>
+
+        <div class="row g-2">
+            {% for fish in stock %}
+                <div class="col-md-2">
+                    <div class="card">
+                        <a href="{{ url_for('singleProductPage', fishId=fish.id) }}" class="fish-link" data-id="{{ fish.id }}" style="flex-shrink:0;">
+                            {% if fish.image %}
+                                <img src="{{ url_for('static', filename='images/' + fish.image) }}"
+                                     alt="image of a {{ fish.name }}"
+                                     style="width:150px; height:150px; object-fit:cover;">
+                            {% else %}
+                                <img src="https://placehold.co/150x150"
+                                     alt="no image available"
+                                     style="width:150px; height:150px; object-fit:cover;">
+                            {% endif %}
+                        </a>
+
+                        <div class="card-body p-2">
+                            <h5 class="card-title mb-1">{{ fish.name }}
+                                <p class="card-text text-muted mb-2" style="padding-top: 3px;">£{{ fish.price }}</p>
+                            </h5>
+
+
+                            <form action="{{ url_for('galleryPage') }}" method="post">
+                                {{ order.hidden_tag() }}
+                                <input type="hidden" name="fish_id" value="{{ fish.id }}">
+
+                                <div class="d-flex align-items-center gap-2 flex-nowrap">
+                                    {{ order.order.label(class="mb-0 fw-semibold text-nowrap") }}
+                                    {{ order.order(class="form-control form-control-sm", style="width:100px; height:30px;") }}
+                                </div>
+                                {{ order.submit() }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script>
+
+    $(document).ready(function() {
+        $(".fish-link").hover(function() {
+            var id = $(this).data("id");
+            $.get('/description/' + id, function(data) {
+                $("#tooltip").html(data).show();
+            });
+        }, function() {
+            $("#tooltip").hide();
+        });
+
+        $(document).mousemove(function(e) {
+            $("#tooltip").css({ top: e.pageY + 10, left: e.pageX + 10 });
+        });
+
+    });
+</script>
+{% endblock %}

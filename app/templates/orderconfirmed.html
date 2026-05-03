@@ -1,0 +1,31 @@
+{%  extends "base.html" %}
+
+{% block content %}
+    <div class="container page-container py-5 text-center" style="max-width: 600px;">
+
+        <p class="text-uppercase fw-semibold mb-4" style="letter-spacing: 0.08em;">Order confirmed</p>
+
+        <p class="fw-semibold mb-1">Thank you, {{ name }}!</p>
+        <p class="text-muted mb-4">Your order has been placed. A confirmation will be sent to {{ email }}.</p>
+
+        <div class="bg-light rounded p-3 text-start mb-4">
+            {% for fishId, item in basket.items() %}
+                <div class="row border-bottom py-2">
+                    <div class="col">
+                        <p class="mb-0 fw-semibold">{{ item.name }} x {{ item.quantity }}</p>
+                    </div>
+                    <div class="col-auto">
+                        <p class="mb-0 fw-semibold">£{{ item.price * item.quantity }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="row pt-2">
+                <div class="col fw-semibold">Total</div>
+                <div class="col-auto fw-semibold">£{{ total }}</div>
+            </div>
+        </div>
+
+        <a href="/" class="btn btn-dark w-100 py-2">Back to shop</a>
+
+    </div>
+{% endblock %}

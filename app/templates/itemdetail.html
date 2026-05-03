@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container page-container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ url_for('static', filename='images/' + fish.image) }}"
+                     alt="image of a {{fish.name}}" style="max-width: 100%">
+            </div>
+
+            <div class="col-md-6">
+                <div class="card-body">
+                    <div class="d-flex align-items-start">
+                        <div>
+                            <h5 class="card-title">{{ fish.name }}
+                                <p class="card-text text-muted" style="padding:2px;">£{{ fish.price }}</p>
+                                {{ fish.description }}
+                            </h5>
+
+
+                        </div>
+
+                        <div class="bottom">
+                            <form action="" method="post">
+                                {{ form.hidden_tag() }}
+                                <input type="hidden" name="fish_id" value="{{ fish.id }}">
+
+                                <div class="form-group d-flex align-items-center gap-2 mb-2">
+                                    {{ form.order(class="form-control form-control-sm", style="width:80px;") }}
+                                </div>
+                                {{ form.submit() }}
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
