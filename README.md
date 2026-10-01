@@ -2,7 +2,7 @@
 
 A web commerce application for buying fish online. Customers can browse the catalogue, add items to a basket and check out, while the store's stock and orders are managed through an SQL database.
 
-**Live demo:** https://cm1102-fishstore-c25037492-cm1102.apps.containers.cs.cf.ac.uk
+It is deployable on openshift, but is currently deployed on a private server.
 
 ## Features
 
